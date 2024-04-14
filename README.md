@@ -63,7 +63,19 @@
 
 
 ## Process monitoring commands
-- __ps__:
+- __ps__: Сообщает о текущих процессах.
+```
+ps aux (Все процессы)
+ps -AFl (Процессы включающие аргументы командной строки)
+ps -AlFH (Все процессы потока в древовидном режиме)
+ps -e -o pid,args --forest (Процессы по иерархии)
+ps -U user -u user u (Список процессов по владельцу)
+ps -p pid -L -o pid,tid,pcpu,state,comm (Все потоки процесса по ID)
+ps -e pcpu,cpu,nice,state,cputime,args --sort pcpu | sed ‘/^ 0.0 /d’| tac |head -5 (Топ 5 процессов по использованию CPU)
+ps -e -orss=,args= | sort -b -k1,1n | pr -TW$COLUMNS | tac | head -5
+ps auxf | sort -nr -k 4 | head -5 (Топ 5 процессов по использованию памяти)
+
+```
 - __top__:
 - __htop__:
 - __atop__:
